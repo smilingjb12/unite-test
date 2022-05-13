@@ -20,12 +20,12 @@ app.use(
   express.static(path.resolve(__dirname, '../../build/'), { maxAge: Infinity })
 );
 
-app.get('/api/locations', async (req, res) => {
+app.get('/api/locations', async (req: any, res: any) => {
   console.log('returning locations');
   res.send(await Request.findAll());
 });
 
-app.post('/api/locations', async (req, res) => {
+app.post('/api/locations', async (req: any, res: any) => {
   const request = req.body;
   const existingEntry = await Request.findByPk(request.id);
   if (existingEntry) {
@@ -41,7 +41,7 @@ app.post('/api/locations', async (req, res) => {
   res.json({ ok: true });
 });
 
-app.get('*', (req, res) => {
+app.get('*', (req: any, res: any) => {
   const frontendAppPath = path.resolve(__dirname, '../../build/index.html');
   res.sendFile(frontendAppPath);
 });
