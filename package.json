@@ -9,7 +9,8 @@
     "start:client": "webpack serve --mode development --port 3000",
     "start:server": "nodemon",
     "lint": "eslint . --ext .js,.ts,.tsx",
-    "lint:fix": "eslint . --fix --ext .js,.ts,.tsx"
+    "lint:fix": "eslint . --fix --ext .js,.ts,.tsx",
+    "heroku-prebuild": "npm install --dev"
   },
   "dependencies": {
     "axios": "^0.27.2",
