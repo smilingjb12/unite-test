@@ -5,7 +5,8 @@
   "private": false,
   "scripts": {
     "build": "webpack --mode production",
-    "start": "npm run build && nodemon",
+    "start": "npm run build",
+    "serve": "npm run build && nodemon",
     "start:client": "webpack serve --mode development --port 3000",
     "start:server": "nodemon",
     "lint": "eslint . --ext .js,.ts,.tsx",
