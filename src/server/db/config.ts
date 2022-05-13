@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { DataTypes, Sequelize } from 'sequelize';
 require('dotenv').config();
 

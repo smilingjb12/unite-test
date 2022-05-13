@@ -12,7 +12,7 @@ export function useLocationsMap() {
         position: [coordinates.lat, coordinates.lng]
       }
     })
-  };
+  }
 
   return { makeMarkers };
 }

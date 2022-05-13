@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const cors = require('cors');
 import express, { Application } from 'express';
 import path from 'path';

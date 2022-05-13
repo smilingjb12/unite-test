@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { isEmpty } from 'lodash';
 import React, { useEffect, useRef } from 'react';
 import { Marker, Popup, useMap } from 'react-leaflet';
