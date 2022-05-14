@@ -46,7 +46,8 @@ app.get('*', (req: any, res: any) => {
   res.sendFile(frontendAppPath);
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+  await Request.sync({ alter: true });
   console.log(`Server is running at http://localhost:${PORT}/`);
 });
 
