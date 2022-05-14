@@ -7,7 +7,7 @@ if (!process.env.DATABASE_URL) {
 }
 
 const sslConfig = process.env.NODE_ENV === 'production'
-  ? { require: true }
+  ? { require: true, rejectUnauthorized: false }
   : { require: false, rejectUnauthorized: false };
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
