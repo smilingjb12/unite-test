@@ -3,6 +3,7 @@ const cors = require('cors');
 import express, { Application } from 'express';
 import path from 'path';
 import { Request } from './db/config';
+import { setNoCache } from './utils';
 require('dotenv').config();
 
 const PUBLIC_URL: string = process.env.PUBLIC_URL || '';
@@ -17,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(
   PUBLIC_URL,
-  express.static(path.resolve(__dirname, '../../build/'), { maxAge: 0 })
+  express.static(path.resolve(__dirname, '../../build/'))
 );
 
 app.get('/api/locations', async (req, res) => {
@@ -43,6 +44,7 @@ app.post('/api/locations', async (req, res) => {
 
 app.get('*', (req: any, res: any) => {
   const frontendAppPath = path.resolve(__dirname, '../../build/index.html');
+  setNoCache(res);
   res.sendFile(frontendAppPath);
 });
 
