@@ -20,12 +20,12 @@ app.use(
   express.static(path.resolve(__dirname, '../../build/'), { maxAge: 0 })
 );
 
-app.get('/api/locations', async (req: any, res: any) => {
+app.get('/api/locations', async (req, res) => {
   console.log('returning locations');
   res.send(await Request.findAll());
 });
 
-app.post('/api/locations', async (req: any, res: any) => {
+app.post('/api/locations', async (req, res) => {
   const request = req.body;
   const existingEntry = await Request.findByPk(request.id);
   if (existingEntry) {
