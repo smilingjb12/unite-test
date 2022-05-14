@@ -18,48 +18,46 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
   },
 });
 
-let request: any;
 sequelize
   .authenticate()
   .then(() => {
     console.log('connection established successfully');
-    request = sequelize.define('Request', {
-      id: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        primaryKey: true
-      },
-      fullName: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      coords: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      status: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
-      country: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue: '',
-      },
-      city: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue: '',
-      },
-      additionalInfo: {
-        type: DataTypes.STRING
-      }
-    }, {
-      // Other model options go here
-    });
   })
   .catch(err => {
     console.log('Could not connect to db:', err);
   });
 
-export const Request = request;
+export const Request = sequelize.define('Request', {
+  id: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    primaryKey: true
+  },
+  fullName: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  coords: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  status: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  country: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: '',
+  },
+  city: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: '',
+  },
+  additionalInfo: {
+    type: DataTypes.STRING
+  }
+}, {
+  // Other model options go here
+});
