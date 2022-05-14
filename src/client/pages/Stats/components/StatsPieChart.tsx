@@ -43,8 +43,6 @@ export function StatsPieChart({ items, title }: Props) {
           <Tooltip />
         </PieChart>
       </ResponsiveContainer>
-
-
     </React.Fragment>
   );
 }

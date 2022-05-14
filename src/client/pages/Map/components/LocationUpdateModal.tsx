@@ -1,9 +1,6 @@
-import isEmpty from 'lodash/isEmpty';
-import React, { FormEvent, useEffect, useState } from 'react';
+import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { useLocationsApi } from '../hooks/useLocationsApi';
-import { useLocationsMap } from '../hooks/useLocationsMap';
-import { LocationInfoForm } from '../types';
+import { useLocationForm } from '../hooks/useLocationForm';
 import { ModalMap } from './ModalMap';
 
 interface Props {
@@ -12,44 +9,13 @@ interface Props {
 }
 
 export function LocationUpdateModal({ isVisible, handleClose }: Props) {
-  const [userInfo, setUserInfo] = useState<LocationInfoForm>({} as LocationInfoForm);
-  const { updateLocation } = useLocationsApi();
-  const { getCurrentUserInfo } = useLocationsMap();
-
-  useEffect(() => {
-    setUserInfo(getCurrentUserInfo());
-  }, [isVisible]);
-
-  const updateTextField = <TProp extends keyof LocationInfoForm>(newValue: string, property: TProp) => {
-    setUserInfo({ ...userInfo, [property]: newValue });
-  };
-
-  const valueIsPopulated = (value: string): boolean => {
-    return !isEmpty(value);
-  }
-
-  const formIsValid = (): boolean => {
-    return valueIsPopulated(userInfo.fullName) && valueIsPopulated(userInfo.coords);
-  };
-
-  const submitForm = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!formIsValid()) {
-      return;
-    }
-
-    updateLocation(userInfo).then(() => {
-      handleClose();
-    });
-  };
-
-  const getInvalidClass = (value: string): string => {
-    return !valueIsPopulated(value) ? 'invalid' : '';
-  };
-
-  const setLocation = (coordinates: string, city: string, country: string): void => {
-    setUserInfo({ ...userInfo, coords: coordinates, city, country });
-  };
+  const {
+    updateTextField,
+    getInvalidClass,
+    submitForm,
+    userInfo,
+    setLocation
+  } = useLocationForm(isVisible, handleClose);
 
   return (
     <Modal show={isVisible} onHide={handleClose}

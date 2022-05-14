@@ -22,19 +22,19 @@ function Map() {
     });
   };
 
-  const handleClose = () => {
+  const closeLocationInfoModal = () => {
     setModalIsVisible(false);
     drawMarkers();
   };
 
-  const showModal = () => {
+  const showLocationInfoModal = () => {
     setModalIsVisible(true);
   };
 
   return (
     <React.Fragment>
       <div className="container mb-2">
-        <Button variant="primary" onClick={showModal}>Изменить мои данные</Button>
+        <Button variant="primary" onClick={showLocationInfoModal}>Изменить мои данные</Button>
       </div>
       <div className="container mb-2">
         <i>Кликните на маркер на карте, чтобы узнать, кто именно из Ваших коллег находится в этом месте.</i>
@@ -42,7 +42,7 @@ function Map() {
       <div className="container">
         <MainMap markers={markers} />
       </div>
-      <LocationUpdateModal isVisible={modalIsVisible} handleClose={handleClose} />
+      <LocationUpdateModal isVisible={modalIsVisible} handleClose={closeLocationInfoModal} />
     </React.Fragment>
   );
 }

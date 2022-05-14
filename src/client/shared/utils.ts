@@ -12,7 +12,7 @@ export function makeGeocodingUrl(lng: number, lat: number): string {
   return `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${ACCESS_TOKEN}`;
 }
 
-export function uuidv4() {
+export function uuidv4(): string {
   return (([1e7] as any) + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c: any) =>
     (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
   );
@@ -26,7 +26,7 @@ export function parseCoordinates(coordinates: string): LatLngLiteral | null {
   return { lat: values[0], lng: values[1] };
 }
 
-export function saveUserIdTokenToLocalStorage() {
+export function saveUserIdTokenToLocalStorage(): void {
   if (!localStorage.getItem(USER_ID_TOKEN_KEY)) {
     localStorage.setItem(USER_ID_TOKEN_KEY, uuidv4());
   }

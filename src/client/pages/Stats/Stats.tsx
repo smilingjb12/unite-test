@@ -49,10 +49,14 @@ function Stats() {
       <hr />
       <div className="row">
         <div className="col-lg-6 col-12 chart-container">
-          <StatsPieChart items={countryChartItems} title="Сотрудники по странам" />
+          <StatsPieChart
+            items={countryChartItems}
+            title="Сотрудники по странам" />
         </div>
         <div className="col-lg-6 col-12 chart-container">
-          <StatsPieChart items={statusChartItems} title="Сотрудники по статусу" />
+          <StatsPieChart
+            items={statusChartItems}
+            title="Сотрудники по статусу" />
         </div>
       </div>
     </div>
