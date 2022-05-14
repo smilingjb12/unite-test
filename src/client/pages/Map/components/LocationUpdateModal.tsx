@@ -1,4 +1,4 @@
-import { isEmpty } from 'lodash';
+import isEmpty from 'lodash/isEmpty';
 import React, { FormEvent, useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useLocationsApi } from '../hooks/useLocationsApi';

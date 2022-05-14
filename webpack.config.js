@@ -55,7 +55,7 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'build'),
-    filename: 'bundle.js',
+    filename: 'bundle-[fullhash].js',
     publicPath: '/'
   },
   resolve: {
