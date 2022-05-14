@@ -1,4 +1,4 @@
-import { uniq } from "lodash";
+import uniq from "lodash/uniq";
 import React, { useEffect, useState } from "react";
 import { LocationInfo } from "../../Map/types";
 

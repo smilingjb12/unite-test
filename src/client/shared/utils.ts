@@ -1,5 +1,5 @@
 import { LatLngLiteral } from "leaflet";
-import { isEmpty } from "lodash";
+import isEmpty from 'lodash/isEmpty';
 import { ACCESS_TOKEN, USER_ID_TOKEN_KEY } from "./constants";
 
 export function makeApiUrl(segment: string): string {

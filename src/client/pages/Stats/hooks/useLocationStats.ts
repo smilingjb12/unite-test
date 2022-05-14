@@ -1,4 +1,5 @@
-import { orderBy, uniq } from "lodash";
+import orderBy from "lodash/orderBy";
+import uniq from 'lodash/uniq';
 import { LocationInfo, MigrationStatus } from "../../Map/types";
 import { MainStatItem, PieChartItem, SourceStatItem } from "../types";
 
