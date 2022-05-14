@@ -1,4 +1,5 @@
-import dotenv from 'dotenv';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const dotenv = require('dotenv');
 import { LatLngLiteral } from "leaflet";
 import { ACCESS_TOKEN, USER_ID_TOKEN_KEY } from "./constants";
 
