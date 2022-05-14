@@ -48,7 +48,7 @@ app.get('*', (req: any, res: any) => {
 
 app.listen(PORT, async () => {
   await Request.sync({ alter: true });
-  console.log(`Server is running at http://localhost:${PORT}/`);
+  console.log(`Server is running at http://localhost:${PORT}`);
 });
 
 module.exports = app;
