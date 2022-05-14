@@ -1,5 +1,6 @@
+import { USER_DATA_TOKEN_KEY } from "../../../shared/constants";
 import { parseCoordinates } from "../../../shared/utils";
-import { LocationInfo, LocationMarker } from "../types";
+import { LocationInfo, LocationInfoForm, LocationMarker, MigrationStatus } from "../types";
 
 export function useLocationsMap() {
   function makeMarkers(locations: LocationInfo[]): LocationMarker[] {
@@ -14,5 +15,10 @@ export function useLocationsMap() {
     })
   }
 
-  return { makeMarkers };
+  function getCurrentUserInfo(): LocationInfoForm {
+    const savedUserInfo = JSON.parse(localStorage.getItem(USER_DATA_TOKEN_KEY)) ?? {};
+    return { ...savedUserInfo, status: savedUserInfo.status ?? MigrationStatus.Working };
+  }
+
+  return { makeMarkers, getCurrentUserInfo };
 }

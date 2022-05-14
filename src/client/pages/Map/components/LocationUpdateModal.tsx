@@ -1,8 +1,8 @@
 import { isEmpty } from 'lodash';
 import React, { FormEvent, useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { USER_DATA_TOKEN_KEY } from '../../../shared/constants';
 import { useLocationsApi } from '../hooks/useLocationsApi';
+import { useLocationsMap } from '../hooks/useLocationsMap';
 import { LocationInfoForm } from '../types';
 import { ModalMap } from './ModalMap';
 
@@ -14,15 +14,14 @@ interface Props {
 export function LocationUpdateModal({ isVisible, handleClose }: Props) {
   const [userInfo, setUserInfo] = useState<LocationInfoForm>({} as LocationInfoForm);
   const { updateLocation } = useLocationsApi();
+  const { getCurrentUserInfo } = useLocationsMap();
 
   useEffect(() => {
-    const savedUserInfo = JSON.parse(localStorage.getItem(USER_DATA_TOKEN_KEY)) ?? {};
-    setUserInfo(savedUserInfo);
+    setUserInfo(getCurrentUserInfo());
   }, [isVisible]);
 
   const updateTextField = <TProp extends keyof LocationInfoForm>(newValue: string, property: TProp) => {
     setUserInfo({ ...userInfo, [property]: newValue });
-    console.log(userInfo);
   };
 
   const valueIsPopulated = (value: string): boolean => {
