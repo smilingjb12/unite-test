@@ -6,7 +6,6 @@ if (!process.env.DATABASE_URL) {
   throw new Error('Connection string is missing!');
 }
 
-console.log('NODE ENV!!!!:', process.env.NODE_ENV);
 const sslConfig = process.env.NODE_ENV === 'production'
   ? { require: true, rejectUnauthorized: false }
   : null;
@@ -17,15 +16,6 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
     ssl: sslConfig
   },
 });
-
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('connection established successfully');
-  })
-  .catch(err => {
-    console.log('Could not connect to db:', err);
-  });
 
 export const Request = sequelize.define('Request', {
   id: {

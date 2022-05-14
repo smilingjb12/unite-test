@@ -93,6 +93,7 @@ export function LocationUpdateModal({ isVisible, handleClose }: Props) {
           <div className="mb-3">
             <input
               value={userInfo.coords}
+              onChange={e => updateTextField(e.target.value, 'coords')}
               type="text"
               className="form-control"
               id="location"

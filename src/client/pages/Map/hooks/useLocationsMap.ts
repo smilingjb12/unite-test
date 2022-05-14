@@ -17,7 +17,15 @@ export function useLocationsMap() {
 
   function getCurrentUserInfo(): LocationInfoForm {
     const savedUserInfo = JSON.parse(localStorage.getItem(USER_DATA_TOKEN_KEY)) ?? {};
-    return { ...savedUserInfo, status: savedUserInfo.status ?? MigrationStatus.Working };
+    return {
+      ...savedUserInfo,
+      fullName: savedUserInfo.fullName ?? '',
+      status: savedUserInfo.status ?? MigrationStatus.Working,
+      coords: savedUserInfo.coords ?? '',
+      country: savedUserInfo.country ?? '',
+      city: savedUserInfo.city ?? '',
+      additionalInfo: savedUserInfo.additionalInfo ?? ''
+    };
   }
 
   return { makeMarkers, getCurrentUserInfo };

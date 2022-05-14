@@ -1,4 +1,5 @@
 import { LatLngLiteral } from "leaflet";
+import { isEmpty } from "lodash";
 import { ACCESS_TOKEN, USER_ID_TOKEN_KEY } from "./constants";
 
 export function makeApiUrl(segment: string): string {
@@ -18,7 +19,7 @@ export function uuidv4() {
 }
 
 export function parseCoordinates(coordinates: string): LatLngLiteral | null {
-  if (coordinates == null) {
+  if (isEmpty(coordinates)) {
     return null;
   }
   const values = coordinates.split(/,\s/g).map(Number);
