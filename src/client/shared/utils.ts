@@ -1,9 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const dotenv = require('dotenv');
 import { LatLngLiteral } from "leaflet";
 import { ACCESS_TOKEN, USER_ID_TOKEN_KEY } from "./constants";
-
-dotenv.config();
 
 export function makeApiUrl(segment: string): string {
   segment = segment.startsWith('/') ? segment.substring(1) : segment;
