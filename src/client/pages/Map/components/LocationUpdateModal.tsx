@@ -102,6 +102,7 @@ export function LocationUpdateModal({ isVisible, handleClose }: Props) {
             <div className="col">
               <input
                 value={userInfo.country}
+                onChange={e => updateTextField(e.target.value, 'country')}
                 type="text"
                 className="form-control"
                 id="country"
@@ -110,6 +111,7 @@ export function LocationUpdateModal({ isVisible, handleClose }: Props) {
             <div className="col">
               <input
                 value={userInfo.city}
+                onChange={e => updateTextField(e.target.value, 'city')}
                 type="text"
                 className="form-control"
                 id="city"
