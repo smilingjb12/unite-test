@@ -16,7 +16,10 @@ export function uuidv4() {
   );
 }
 
-export function parseCoordinates(coordinates: string): LatLngLiteral {
+export function parseCoordinates(coordinates: string): LatLngLiteral | null {
+  if (coordinates == null) {
+    return null;
+  }
   const values = coordinates.split(/,\s/g).map(Number);
   return { lat: values[0], lng: values[1] };
 }

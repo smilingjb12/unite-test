@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(
   PUBLIC_URL,
-  express.static(path.resolve(__dirname, '../../build/'), { maxAge: Infinity })
+  express.static(path.resolve(__dirname, '../../build/'), { maxAge: 0 })
 );
 
 app.get('/api/locations', async (req: any, res: any) => {

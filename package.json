@@ -3,9 +3,12 @@
   "author": "Kiril Pashkov",
   "version": "0.1.0",
   "private": false,
+  "engines": {
+    "node": "16.14.x"
+  },
   "scripts": {
     "build": "webpack --mode production",
-    "start": "npm run build",
+    "start": "ts-node src/server/index.ts",
     "serve": "npm run build && nodemon",
     "start:client": "webpack serve --mode development --port 3000",
     "start:server": "nodemon",

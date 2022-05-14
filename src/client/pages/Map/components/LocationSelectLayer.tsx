@@ -16,7 +16,9 @@ export default function LocationSelectLayer({ setLocation, coordinates }: Props)
 
   useEffect(() => {
     const latLng = parseCoordinates(coordinates);
-    setPosition({ lat: latLng.lat, lng: latLng.lng });
+    if (latLng != null) {
+      setPosition({ lat: latLng.lat, lng: latLng.lng });
+    }
   }, [coordinates]);
 
   const map = useMapEvents({
