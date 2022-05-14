@@ -61,7 +61,7 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'build'),
-    filename: 'bundle-[fullhash].js',
+    filename: '[name]-[fullhash].js',
     publicPath: '/'
   },
   resolve: {
@@ -73,5 +73,25 @@ module.exports = {
     watchFiles: ['./src/client**'],
     hot: true,
     port: 3000,
-  }
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            // get the name. E.g. node_modules/packageName/not/this/part.js
+            // or node_modules/packageName
+            const packageName = module.context.match(
+              /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+            )[1];
+
+            // npm package names are URL-safe, but some servers don't like @ symbols
+            return `npm.${packageName.replace("@", "")}`;
+          }
+        },
+      }
+    },
+  },
 };

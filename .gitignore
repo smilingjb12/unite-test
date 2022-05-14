@@ -11,6 +11,16 @@
 # production
 /build
 
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
 # misc
 .DS_Store
 .env
