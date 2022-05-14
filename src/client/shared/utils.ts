@@ -6,7 +6,7 @@ export function makeApiUrl(segment: string): string {
   if (process.env.NODE_ENV.toLowerCase() === 'production') {
     return `${process.env.API_URL}/${segment}`;
   }
-  return `localhost:${process.env.PORT}/${segment}`;
+  return `http://localhost:${process.env.PORT}/${segment}`;
 }
 
 export function makeGeocodingUrl(lng: number, lat: number): string {
