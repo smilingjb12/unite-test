@@ -8,11 +8,11 @@ if (!process.env.DATABASE_URL) {
 
 const sslConfig = process.env.NODE_ENV === 'production'
   ? { require: true, rejectUnauthorized: false }
-  : { require: false, rejectUnauthorized: false };
+  : null;
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: "postgres",
-  dialectOptions: process.env.DATABASE_FORBID_SSL ? null : {
+  dialectOptions: {
     ssl: sslConfig
   },
 });
