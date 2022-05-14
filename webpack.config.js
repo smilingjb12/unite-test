@@ -15,7 +15,7 @@ const envKeys = Object.keys(env).reduce((prev, next) => {
 
 module.exports = {
   entry: './src/client/index.tsx',
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   module: {
     rules: [
       {
