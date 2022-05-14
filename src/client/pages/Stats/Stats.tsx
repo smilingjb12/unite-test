@@ -48,10 +48,10 @@ export function Stats() {
         locations={locations} />
       <hr />
       <div className="row">
-        <div className="col chart-container">
+        <div className="col-lg-6 col-12 chart-container">
           <StatsPieChart items={countryChartItems} title="Сотрудники по странам" />
         </div>
-        <div className="col chart-container">
+        <div className="col-lg-6 col-12 chart-container">
           <StatsPieChart items={statusChartItems} title="Сотрудники по статусу" />
         </div>
       </div>

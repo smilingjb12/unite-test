@@ -1,28 +1,39 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const cors = require('cors');
+import compression from "compression";
 import express, { Application } from 'express';
 import path from 'path';
 import { Request } from './db/config';
-import { setNoCache } from './utils';
+import { setLongTermCache, setNoCache } from './utils';
 require('dotenv').config();
 
-const PUBLIC_URL: string = process.env.PUBLIC_URL || '';
 const PORT: string = process.env.PORT || '3001';
 
 const app: Application = express();
 
+app.use(compression());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 app.use(
-  PUBLIC_URL,
-  express.static(path.resolve(__dirname, '../../build/'))
+  express.static(path.resolve(__dirname, '../../build/'), {
+    extensions: ['html'],
+    setHeaders(res, path) {
+      if (path.match(/(\.html|\/sw\.js)$/)) {
+        setNoCache(res);
+        return;
+      }
+
+      if (path.match(/\.(js|css|png|jpg|jpeg|gif|ico|json)$/)) {
+        setLongTermCache(res);
+      }
+    }
+  })
 );
 
 app.get('/api/locations', async (req, res) => {
-  console.log('returning locations');
   res.send(await Request.findAll());
 });
 
