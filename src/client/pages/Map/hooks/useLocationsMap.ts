@@ -19,6 +19,7 @@ export function useLocationsMap() {
     const savedUserInfo = JSON.parse(localStorage.getItem(USER_DATA_TOKEN_KEY)) ?? {};
     return {
       ...savedUserInfo,
+      id: savedUserInfo.id ?? '',
       fullName: savedUserInfo.fullName ?? '',
       status: savedUserInfo.status ?? MigrationStatus.Working,
       coords: savedUserInfo.coords ?? '',

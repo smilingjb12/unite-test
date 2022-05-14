@@ -26,6 +26,7 @@ export interface LocationInfo {
 }
 
 export interface LocationInfoForm {
+  id: string;
   fullName: string;
   status: string;
   coords: string;

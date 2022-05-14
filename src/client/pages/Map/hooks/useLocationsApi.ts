@@ -1,4 +1,5 @@
 import axios from "axios";
+import isEmpty from "lodash/isEmpty";
 import { USER_DATA_TOKEN_KEY } from "../../../shared/constants";
 import { makeApiUrl, makeGeocodingUrl, uuidv4 } from "../../../shared/utils";
 import { GeocodingInfo, LocationInfo, LocationInfoForm } from "../types";
@@ -20,8 +21,10 @@ export function useLocationsApi() {
   }
 
   async function updateLocation(formData: LocationInfoForm): Promise<void> {
-    const id = uuidv4();
-    await axios.post(makeApiUrl('/api/locations'), { ...formData, id });
+    if (isEmpty(formData.id)) {
+      formData.id = uuidv4();
+    }
+    await axios.post(makeApiUrl('/api/locations'), formData);
     localStorage.setItem(USER_DATA_TOKEN_KEY, JSON.stringify(formData));
   }
 
