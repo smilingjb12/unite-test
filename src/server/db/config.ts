@@ -5,13 +5,15 @@ require('dotenv').config();
 if (!process.env.DATABASE_URL) {
   throw new Error('Connection string is missing!');
 }
+
+const sslConfig = process.env.NODE_ENV === 'production'
+  ? { require: true }
+  : { require: false, rejectUnauthorized: false };
+
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: "postgres",
   dialectOptions: process.env.DATABASE_FORBID_SSL ? null : {
-    ssl: {
-      require: false,
-      rejectUnauthorized: false
-    }
+    ssl: sslConfig
   },
 });
 
