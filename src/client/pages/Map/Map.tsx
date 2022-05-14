@@ -6,7 +6,7 @@ import { useLocationsApi } from './hooks/useLocationsApi';
 import { useLocationsMap } from './hooks/useLocationsMap';
 import { LocationMarker } from './types';
 
-export function Map() {
+function Map() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const [markers, setMarkers] = useState<LocationMarker[]>([]);
   const { makeMarkers } = useLocationsMap();
@@ -46,3 +46,5 @@ export function Map() {
     </React.Fragment>
   );
 }
+
+export default Map;

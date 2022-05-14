@@ -8,7 +8,7 @@ import { StatsPieChart } from './components/StatsPieChart';
 import { useLocationStats } from './hooks/useLocationStats';
 import { PieChartItem } from './types';
 
-export function Stats() {
+function Stats() {
   const { fetchLocations } = useLocationsApi();
   const { makeStatusPieChartItems, makeCountryPieChartItems } = useLocationStats();
   const [statsModalVisible, setStatsModalVisible] = useState(false);
@@ -58,3 +58,5 @@ export function Stats() {
     </div>
   );
 }
+
+export default Stats;

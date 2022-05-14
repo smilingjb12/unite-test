@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
-
+const WebpackBundleAnalyzer = require('webpack-bundle-analyzer');
 const env = dotenv.config().parsed;
 const envKeys = Object.keys(env).reduce((prev, next) => {
   prev[`process.env.${next}`] = JSON.stringify(env[next]);
@@ -22,7 +22,14 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        use: 'babel-loader'
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            plugins: [
+              'lodash'
+            ]
+          }
+        }]
       },
       {
         test: /\.s?css$/,
@@ -51,7 +58,8 @@ module.exports = {
         { from: './src/client/manifest.json', to: './' }
       ],
     }),
-    new webpack.DefinePlugin(envKeys)
+    new webpack.DefinePlugin(envKeys),
+    //new WebpackBundleAnalyzer.BundleAnalyzerPlugin()
   ],
   output: {
     path: path.join(__dirname, 'build'),
