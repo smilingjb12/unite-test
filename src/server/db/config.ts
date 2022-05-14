@@ -6,7 +6,7 @@ if (!process.env.DATABASE_URL) {
   throw new Error('Connection string is missing!');
 }
 
-console.log('NODE ENV!!!!!:', process.env.NODE_ENV);
+console.log('NODE ENV!!!!:', process.env.NODE_ENV);
 const sslConfig = process.env.NODE_ENV === 'production'
   ? { require: true, rejectUnauthorized: false }
   : null;
