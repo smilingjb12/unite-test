@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const WebpackBundleAnalyzer = require('webpack-bundle-analyzer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const env = dotenv.config().parsed;
 const envKeys = Object.keys(env).reduce((prev, next) => {
   prev[`process.env.${next}`] = JSON.stringify(env[next]);
@@ -33,7 +34,7 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
@@ -46,6 +47,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: './src/client/index.html',
       favicon: './src/client/favicon.ico',
