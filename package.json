@@ -25,6 +25,7 @@
     "express": "^4.17.1",
     "leaflet": "^1.7.1",
     "leaflet.markercluster": "^1.4.1",
+    "lodash-es": "^4.17.21",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "react": "^17.0.1",
