@@ -4,10 +4,7 @@ import { ACCESS_TOKEN, USER_ID_TOKEN_KEY } from "./constants";
 export function makeApiUrl(segment: string): string {
   segment = segment.startsWith('/') ? segment.substring(1) : segment;
 
-  if (process.env.NODE_ENV === 'development') {
-    return `http://localhost:${process.env.PORT}/${segment}`;
-  }
-  return `/${segment}`;
+  return `${process.env.API_URL}/${segment}`;
 }
 
 export function makeGeocodingUrl(lng: number, lat: number): string {

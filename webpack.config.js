@@ -10,8 +10,7 @@ const envKeys = Object.keys(env).reduce((prev, next) => {
   prev[`process.env.${next}`] = JSON.stringify(env[next]);
   return prev;
 }, {});
-console.log('vars', env);
-console.log('FROM WEBPACK', envKeys);
+
 module.exports = {
   entry: './src/client/index.tsx',
   devtool: 'inline-source-map',
