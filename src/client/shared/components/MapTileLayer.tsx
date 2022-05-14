@@ -2,11 +2,7 @@ import React from "react";
 import { TileLayer } from "react-leaflet";
 import { ACCESS_TOKEN } from "../constants";
 
-interface Props {
-  accessToken?: string;
-}
-
-export function MapTileLayer({ accessToken }: Props) {
+export function MapTileLayer() {
   return (
     <TileLayer
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -15,7 +11,7 @@ export function MapTileLayer({ accessToken }: Props) {
       id={'mapbox/streets-v11'}
       tileSize={512}
       zoomOffset={-1}
-      accessToken={accessToken ?? ACCESS_TOKEN}
+      accessToken={ACCESS_TOKEN}
     />
   )
 }
