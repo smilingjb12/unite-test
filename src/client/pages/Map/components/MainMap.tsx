@@ -14,7 +14,6 @@ export function MainMap({ markers }: Props) {
     <MapContainer
       className="main-map"
       scrollWheelZoom={true}
-      center={MAIN_MAP_DEFAULTS.CENTER}
       zoom={MAIN_MAP_DEFAULTS.ZOOM}>
       <MapTileLayer />
       <LocationMarkerList markers={markers} />

@@ -16,7 +16,7 @@ export function LocationMarkerList({ markers }: Props) {
   useEffect(() => {
     const bounds = markerGroup.current.getBounds();
     if (!isEmpty(bounds)) {
-      map.fitBounds(bounds);
+      map.fitBounds(bounds, { animate: false });
     }
   }, [markers]);
 
