@@ -1,6 +1,7 @@
-import { LatLngLiteral } from "leaflet";
+import { LatLng, LatLngLiteral } from "leaflet";
 import isEmpty from 'lodash/isEmpty';
-import { ACCESS_TOKEN, USER_ID_TOKEN_KEY } from "./constants";
+import { MigrationStatus, UserInfoUpdateForm } from "../pages/Locations/types";
+import { ACCESS_TOKEN, USER_DATA_TOKEN_KEY, USER_ID_TOKEN_KEY } from "./constants";
 
 export function makeApiUrl(segment: string): string {
   segment = segment.startsWith('/') ? segment.substring(1) : segment;
@@ -26,8 +27,26 @@ export function parseCoordinates(coordinates: string): LatLngLiteral | null {
   return { lat: values[0], lng: values[1] };
 }
 
+export function toCoordinatesString(latLng: LatLng): string {
+  return `${latLng.lat}, ${latLng.lng}`;
+}
+
 export function saveUserIdTokenToLocalStorage(): void {
   if (!localStorage.getItem(USER_ID_TOKEN_KEY)) {
     localStorage.setItem(USER_ID_TOKEN_KEY, uuidv4());
   }
+}
+
+export function getSavedUserInfo(): UserInfoUpdateForm {
+  const savedUserInfo = JSON.parse(localStorage.getItem(USER_DATA_TOKEN_KEY)) ?? {};
+  return {
+    ...savedUserInfo,
+    id: savedUserInfo.id ?? uuidv4(),
+    fullName: savedUserInfo.fullName ?? '',
+    status: savedUserInfo.status ?? MigrationStatus.Working,
+    coords: savedUserInfo.coords ?? '',
+    country: savedUserInfo.country ?? '',
+    city: savedUserInfo.city ?? '',
+    additionalInfo: savedUserInfo.additionalInfo ?? ''
+  };
 }

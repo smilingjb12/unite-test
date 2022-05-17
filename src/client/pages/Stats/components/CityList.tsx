@@ -1,22 +1,12 @@
-import uniq from "lodash/uniq";
-import React, { useEffect, useState } from "react";
-import { LocationInfo } from "../../Map/types";
+import React from "react";
+import { useLocationStats } from "../hooks/useLocationStats";
 
-interface Props {
-  locations: LocationInfo[];
-}
-
-export function CityList({ locations }: Props) {
-  const [cities, setCities] = useState<string[]>([]);
-
-  useEffect(() => {
-    const cities = uniq(locations.map(l => l.city));
-    setCities(cities);
-  }, [locations]);
+export function CityList() {
+  const stats = useLocationStats();
 
   return (
     <p>
-      Сотрудники нашей команды находятся в следующих городах: {cities.join(", ")}
+      Сотрудники нашей команды находятся в следующих городах: {stats.uniqueCitiesString}
     </p>
   );
 }

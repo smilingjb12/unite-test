@@ -1,22 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Modal } from "react-bootstrap";
-import { LocationInfo } from "../../Map/types";
+import { useAppDispatch } from "../../../store";
 import { useLocationStats } from "../hooks/useLocationStats";
-import { SourceStatItem } from "../types";
+import { actions } from '../statsSlice';
 
-interface Props {
-  isVisible: boolean;
-  handleClose: () => void;
-  locations: LocationInfo[];
-}
+export function SourceStatsModal() {
+  const dispatch = useAppDispatch();
+  const stats = useLocationStats();
+  const isVisible = stats.sourceStatsModalIsVisible;
 
-export function SourceStatsModal({ isVisible, handleClose, locations }: Props) {
-  const [sourceItems, setSourceItems] = useState<SourceStatItem[]>([]);
-  const { makeSourceStatItems } = useLocationStats();
-
-  useEffect(() => {
-    setSourceItems(makeSourceStatItems(locations));
-  }, [locations]);
+  const handleClose = () => {
+    dispatch(actions.closeSourceStatsModal());
+  };
 
   return (
     <Modal show={isVisible} onHide={handleClose}
@@ -35,7 +30,7 @@ export function SourceStatsModal({ isVisible, handleClose, locations }: Props) {
             </tr>
           </thead>
           <tbody>
-            {sourceItems.map((i, index) => (
+            {stats.sourceStatItems.map((i, index) => (
               <tr key={index}>
                 <td>{i.fullName}</td>
                 <td>{i.country}</td>

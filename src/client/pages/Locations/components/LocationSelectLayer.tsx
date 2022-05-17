@@ -1,8 +1,8 @@
 import { LatLngExpression, LeafletMouseEvent } from "leaflet";
 import React, { useEffect, useState } from "react";
 import { Marker, Popup, useMapEvents } from "react-leaflet";
-import { parseCoordinates } from "../../../shared/utils";
-import { useLocationsApi } from "../hooks/useLocationsApi";
+import { geocodeLocation } from "../../../shared/api/locationsApi";
+import { parseCoordinates, toCoordinatesString } from "../../../shared/utils";
 import { SetLocation } from "../types";
 
 interface Props {
@@ -12,7 +12,6 @@ interface Props {
 
 export default function LocationSelectLayer({ setLocation, coordinates }: Props) {
   const [position, setPosition] = useState<LatLngExpression>(null);
-  const { geocodeLocation } = useLocationsApi();
 
   useEffect(() => {
     const latLng = parseCoordinates(coordinates);
@@ -21,11 +20,11 @@ export default function LocationSelectLayer({ setLocation, coordinates }: Props)
     }
   }, [coordinates]);
 
-  const map = useMapEvents({
+  useMapEvents({
     click(e: LeafletMouseEvent) {
       setPosition(e.latlng);
       geocodeLocation(e.latlng.lng, e.latlng.lat).then(location => {
-        const coordinates = `${e.latlng.lat}, ${e.latlng.lng}`;
+        const coordinates = toCoordinatesString(e.latlng);
         setLocation(coordinates, location.city, location.country);
       });
     }

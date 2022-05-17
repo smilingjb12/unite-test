@@ -2,27 +2,24 @@
 import isEmpty from 'lodash/isEmpty';
 import React, { useEffect, useRef } from 'react';
 import { Marker, Popup, useMap } from 'react-leaflet';
-import { LocationMarker } from '../types';
+import { useLocations } from '../hooks/useLocations';
 const MarkerClusterGroup = require('react-leaflet-markercluster').default;
 
-interface Props {
-  markers: LocationMarker[];
-}
-
-export function LocationMarkerList({ markers }: Props) {
+export function LocationMarkerList() {
   const markerGroup = useRef(null);
   const map = useMap();
+  const data = useLocations();
 
   useEffect(() => {
     const bounds = markerGroup.current.getBounds();
     if (!isEmpty(bounds)) {
       map.fitBounds(bounds, { animate: false });
     }
-  }, [markers]);
+  }, [data.markers]);
 
   return (
     <MarkerClusterGroup ref={markerGroup}>
-      {markers.map(m => (
+      {data.markers.map(m => (
         <Marker key={m.id} position={m.position}>
           <Popup>
             <b>{m.fullName}</b>

@@ -1,22 +1,26 @@
 import React, { lazy, Suspense } from 'react';
+import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { Layout } from './shared/components/Layout';
+import { store } from './store';
 
-const Map = lazy(() => import('./pages/Map/Map'));
+const Locations = lazy(() => import('./pages/Locations/Locations'));
 const Stats = lazy(() => import('./pages/Stats/Stats'));
 
 export function App() {
   return (
-    <BrowserRouter>
-      <Layout>
-        <Suspense fallback={<>Loading...</>}>
-          <Routes>
-            <Route path="/" element={<Map />} />
-            <Route path="/stats" element={<Stats />} />
-          </Routes>
-        </Suspense>
-      </Layout>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Layout>
+          <Suspense fallback={<>Loading...</>}>
+            <Routes>
+              <Route path="/" element={<Locations />} />
+              <Route path="/stats" element={<Stats />} />
+            </Routes>
+          </Suspense>
+        </Layout>
+      </BrowserRouter>
+    </Provider>
   );
 }

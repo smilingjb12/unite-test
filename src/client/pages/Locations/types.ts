@@ -25,7 +25,17 @@ export interface LocationInfo {
   updatedAt: Date;
 }
 
-export interface LocationInfoForm {
+export interface UserLocationInfo {
+  id: string;
+  fullName: string;
+  status: string;
+  coords: string;
+  country: string;
+  city: string;
+  additionalInfo: string;
+}
+
+export interface UserInfoUpdateForm {
   id: string;
   fullName: string;
   status: string;

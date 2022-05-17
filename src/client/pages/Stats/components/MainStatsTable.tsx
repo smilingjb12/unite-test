@@ -1,19 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { LocationInfo } from "../../Map/types";
+import React from "react";
+import { useAppDispatch } from "../../../store";
 import { useLocationStats } from "../hooks/useLocationStats";
-import { MainStatItem } from "../types";
 
-interface Props {
-  locations: LocationInfo[];
-}
-
-export function MainStatsTable({ locations }: Props) {
-  const { makeMainStatItems } = useLocationStats();
-  const [mainStatItems, setMainStatItems] = useState<MainStatItem[]>([]);
-
-  useEffect(() => {
-    setMainStatItems(makeMainStatItems(locations));
-  }, [locations]);
+export function MainStatsTable() {
+  const dispatch = useAppDispatch();
+  const stats = useLocationStats();
 
   return (
     <table className="table table-default table-hover table-stripped">
@@ -27,7 +18,7 @@ export function MainStatsTable({ locations }: Props) {
         </tr>
       </thead>
       <tbody>
-        {mainStatItems.map((item, index) => (
+        {stats.mainStatItems.map((item, index) => (
           <tr key={index}>
             <td>{item.country}</td>
             <td>{item.total}</td>
