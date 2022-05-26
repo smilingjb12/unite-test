@@ -7,6 +7,13 @@ export interface MainStatItem {
   temporary: number;
 }
 
+export interface MainStatTotals {
+  total: number;
+  working: number;
+  planning: number;
+  temporary: number;
+}
+
 export interface StatusCount {
   statusName: string;
   count: number;

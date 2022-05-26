@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapContainer } from 'react-leaflet';
 import { MapTileLayer } from '../../../shared/components/MapTileLayer';
+import { MAP_DEFAULTS } from '../../../shared/constants';
 import { SetLocation } from '../types';
 import LocationSelectLayer from './LocationSelectLayer';
 
@@ -15,8 +16,8 @@ export function ModalMap({ setLocation, coordinates }: Props) {
     <MapContainer
       className="modal-map"
       scrollWheelZoom={true}
-      zoom={5}
-      center={[53.90069725440663, 27.554054260253906]}>
+      zoom={MAP_DEFAULTS.MODAL.ZOOM}
+      center={MAP_DEFAULTS.MODAL.CENTER}>
       <MapTileLayer />
       <LocationSelectLayer setLocation={setLocation} coordinates={coordinates} />
     </MapContainer>

@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { LocationsState } from "../../Locations/locationsSlice";
-import { getCountryPieChartItems, getMainStatItems, getSouceItemsModalIsVisible, getSourceStatItems, getStatusPieChartItems, getUniqueCitiesString } from "../selectors";
+import { getCountryPieChartItems, getMainStatItems, getMainStatTotals, getSourceItemsModalIsVisible, getSourceStatItems, getStatusPieChartItems, getUniqueCitiesString } from "../selectors";
 import { StatsState } from "../statsSlice";
 
 export function useLocationStats() {
@@ -9,14 +9,16 @@ export function useLocationStats() {
   const statsState = useSelector<RootState, StatsState>(state => state.stats);
   const uniqueCitiesString = getUniqueCitiesString(locationsState);
   const mainStatItems = getMainStatItems(locationsState);
+  const mainStatTotals = getMainStatTotals(locationsState);
   const sourceStatItems = getSourceStatItems(locationsState);
   const statusPieChartItems = getStatusPieChartItems(locationsState);
   const countryPieChartItems = getCountryPieChartItems(locationsState);
-  const sourceStatsModalIsVisible = getSouceItemsModalIsVisible(statsState);
+  const sourceStatsModalIsVisible = getSourceItemsModalIsVisible(statsState);
 
   return {
     uniqueCitiesString,
     mainStatItems,
+    mainStatTotals,
     sourceStatItems,
     statusPieChartItems,
     countryPieChartItems,

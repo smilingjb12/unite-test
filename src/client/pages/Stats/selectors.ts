@@ -1,10 +1,11 @@
 import orderBy from 'lodash/orderBy';
+import sumBy from 'lodash/sumBy';
 import uniq from 'lodash/uniq';
 import { createSelector } from "reselect";
 import { LocationsState } from "../Locations/locationsSlice";
 import { MigrationStatus } from "../Locations/types";
 import { StatsState } from './statsSlice';
-import { MainStatItem } from "./types";
+import { MainStatItem, MainStatTotals } from "./types";
 
 const getLocations = (state: LocationsState) => state.locations;
 
@@ -13,7 +14,7 @@ const getUniqueCities = createSelector(
   locations => uniq(locations.map(l => l.city))
 );
 
-export const getSouceItemsModalIsVisible = (state: StatsState) => state.sourceItemsModalIsVisible;
+export const getSourceItemsModalIsVisible = (state: StatsState) => state.sourceItemsModalIsVisible;
 
 export const getUniqueCitiesString = createSelector(
   getUniqueCities,
@@ -38,6 +39,15 @@ export const getMainStatItems = createSelector(
     return orderBy(items, i => i.total, ['desc']);
   }
 );
+
+export const getMainStatTotals = createSelector(getMainStatItems, items => {
+  return {
+    total: sumBy(items, i => i.total),
+    working: sumBy(items, i => i.working),
+    planning: sumBy(items, i => i.planning),
+    temporary: sumBy(items, i => i.temporary)
+  } as MainStatTotals;
+});
 
 export const getSourceStatItems = createSelector(
   getLocations,
@@ -72,10 +82,12 @@ export const getStatusPieChartItems = createSelector(
       [MigrationStatus.Temporary]: "Находятся временно"
     };
 
-    return statuses.map(s => ({
+    const items = statuses.map(s => ({
       name: statusNameMap[s],
       value: locations.filter(l => l.status === s).length
     }));
+
+    return orderBy(items, i => i.value, ['desc']);
   }
 );
 
@@ -84,9 +96,11 @@ export const getCountryPieChartItems = createSelector(
   locations => {
     const countries = uniq(locations.map(l => l.country));
 
-    return countries.map(c => ({
+    const items = countries.map(c => ({
       name: c,
       value: locations.filter(l => l.country === c).length
     }));
+
+    return orderBy(items, i => i.value, ['desc']);
   }
 );

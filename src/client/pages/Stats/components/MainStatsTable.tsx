@@ -1,10 +1,8 @@
 import React from "react";
-import { useAppDispatch } from "../../../store";
 import { useLocationStats } from "../hooks/useLocationStats";
 
 export function MainStatsTable() {
-  const dispatch = useAppDispatch();
-  const stats = useLocationStats();
+  const { mainStatItems, mainStatTotals } = useLocationStats();
 
   return (
     <table className="table table-default table-hover table-stripped">
@@ -18,7 +16,7 @@ export function MainStatsTable() {
         </tr>
       </thead>
       <tbody>
-        {stats.mainStatItems.map((item, index) => (
+        {mainStatItems.map((item, index) => (
           <tr key={index}>
             <td>{item.country}</td>
             <td>{item.total}</td>
@@ -28,6 +26,15 @@ export function MainStatsTable() {
           </tr>
         ))}
       </tbody>
+      <tfoot>
+        <tr>
+          <th>Итого:</th>
+          <th>{mainStatTotals.total}</th>
+          <th>{mainStatTotals.working}</th>
+          <th>{mainStatTotals.planning}</th>
+          <th>{mainStatTotals.temporary}</th>
+        </tr>
+      </tfoot>
     </table>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
-import { CHART_COLORS } from "../../../shared/constants";
+import { CHART } from "../../../shared/constants";
 import { PieChartItem } from "../types";
 
 interface Props {
@@ -10,15 +10,18 @@ interface Props {
 
 export function StatsPieChart({ items, title }: Props) {
   const legendFormatter = (value: any, entry: any) => {
-    const { color } = entry;
-    return <span style={{ color: '#797979' }}>{value}</span>
-  }
+    return <span style={{ color: CHART.PIE_CHART.LEGEND_TEXT_COLOR }}>{value}</span>
+  };
+
+  const getSectorFillColor = (index: number): string => {
+    return CHART.COLORS[index % CHART.COLORS.length];
+  };
 
   return (
     <React.Fragment>
       <h2 className="text-center">{title}</h2>
       <ResponsiveContainer width="100%" height="100%">
-        <PieChart width={800} height={800}>
+        <PieChart width={CHART.PIE_CHART.WIDTH} height={CHART.PIE_CHART.HEIGHT}>
           <Legend
             layout="horizontal"
             verticalAlign="top"
@@ -28,16 +31,15 @@ export function StatsPieChart({ items, title }: Props) {
             dataKey="value"
             isAnimationActive={false}
             data={items}
-            cx="50%"
-            cy="50%"
-            outerRadius={220}
-            fill="#8884d8"
-            label
-          >
+            cx={CHART.PIE_CHART.CIRCLE_X}
+            cy={CHART.PIE_CHART.CIRCLE_Y}
+            outerRadius={CHART.PIE_CHART.OUTER_RADIUS}
+            fill={CHART.PIE_CHART.BASE_FILL_COLOR}
+            label>
             {items.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
-                fill={CHART_COLORS[index % CHART_COLORS.length]} />
+                fill={getSectorFillColor(index)} />
             ))}
           </Pie>
           <Tooltip />
